@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Action first -->
+    <record id="action_mortality_detail" model="ir.actions.act_window">
+        <field name="name">Mortality</field>
+        <field name="res_model">farm.mortality.details</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu references the action -->
+    <menuitem id="menu_mortality_root" 
+              name="Mortality" 
+              parent="menu_layer_flock_root" 
+              action="farm_management.action_mortality_detail" 
+              sequence="20"/>
+
+    <!-- Sequence -->
+    <record id="seq_mortality_details" model="ir.sequence">
+        <field name="name">Mortality Details Sequence</field>
+        <field name="code">farm.mortality.details</field>
+        <field name="prefix">MD</field>
+        <field name="padding">4</field>
+    </record>
+
+    <!-- List view -->
+    <record id="view_mortality_list" model="ir.ui.view">
+        <field name="name">farm.mortality.details.list</field>
+        <field name="model">farm.mortality.details</field>
+        <field name="arch" type="xml">
+            <list string="Mortality Records">
+                <field name="date"/>
+                <field name="flock_id"/>
+                <field name="normal"/>
+                <field name="culled"/>
+                <field name="vaccine"/>
+                <field name="prolapse"/>
+                <field name="heat_stress"/>
+                <field name="mechanical"/>
+                <field name="injury"/>
+                <field name="other"/>
+                <field name="total_mortality"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="view_mortality_form" model="ir.ui.view">
+        <field name="name">farm.mortality.details.form</field>
+        <field name="model">farm.mortality.details</field>
+        <field name="arch" type="xml">
+            <form string="Mortality Details">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                    <button class="btn-primary" type="object" name="action_draft" string="Draft"/>
+                    <button class="btn-primary" type="object" name="action_confirm" string="Confirm"/>
+                </header>
+                <sheet>
+                    <group col="2">
+                        <group string="Flock Details" readonly="state == 'done'">
+                            <field name="name"/>
+                            <field name="flock_id"/>
+                            <field name="date"/>
+                            <field name="flock_opening_bird"/>
+                            <field name="flock_starting_date"/>
+                            <field name="flock_ending_date"/>
+                        </group>
+                        <group string="Mortality Details" readonly="1">
+                            <field name="total_mortality"/>
+                            <field name="updated_Birds"/>
+                            <field name ="yesterday_date"/>
+                        </group>
+                    </group>
+
+                    <group string="Mortality Breakdown" col="4" readonly="state == 'done'">
+                        <field name="normal"/>
+                        <field name="culled"/>
+                        <field name="vaccine"/>
+                        <field name="prolapse"/>
+                        <field name="heat_stress"/>
+                        <field name="mechanical"/>
+                        <field name="injury"/>
+                        <field name="other"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+</odoo>

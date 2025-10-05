@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_farm_layer_flock,access.farm.layer.flock,model_farm_layer_flock,,1,1,1,1
+access_farm_mortality_details,access.farm.mortality.details,model_farm_mortality_details,,1,1,1,1
+access_farm_production_details,access.farm.production.details,model_farm_production_details,,1,1,1,1
+access_farm_egg_line,farm.egg.line,model_farm_egg_line,base.group_user,1,1,1,1

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Menu & Action -->
+    <menuitem id="menu_farm_production_root" 
+              name="Production" 
+              parent="menu_layer_flock_root"  
+              action="action_farm_production_details"  
+              sequence="30"/>
+
+    <record id="action_farm_production_details" model="ir.actions.act_window">
+        <field name="name">Production Details</field>
+        <field name="res_model">farm.production.details</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Record daily egg production here.</p>
+        </field>
+    </record>
+
+    <!-- List (Tree) View -->
+    <record id="view_farm_production_details_tree" model="ir.ui.view">
+        <field name="name">farm.production.details.list</field>
+        <field name="model">farm.production.details</field>
+        <field name="arch" type="xml">
+            <list string="Production Details">
+                <field name="date"/>
+                <field name="flock_id"/>
+                <field name="total_egg"/>
+                <field name="percentage"/>
+                <field name="cumulative_egg"/>
+                <field name="egg_weight"/>
+                <field name="act"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_farm_production_details_form" model="ir.ui.view">
+        <field name="name">farm.production.details.form</field>
+        <field name="model">farm.production.details</field>
+        <field name="arch" type="xml">
+            <form string="Production Details">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="flock_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <!-- Egg Categories as editable lines -->
+                        <page string="Egg Categories">
+                            <field name="egg_line_ids">
+                                <list editable="bottom">
+                                    <field name="small"/>
+                                    <field name="medium"/>
+                                    <field name="high_medium"/>
+                                    <field name="high"/>
+                                    <field name="double_yolk"/>
+                                    <field name="broken"/>
+                                    <field name="white"/>
+                                    <field name="damage"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Summary -->
+                        <page string="Summary">
+                            <group col="3">
+                                <field name="total_egg" readonly="1"/>
+                                <field name="percentage"/>
+                                <field name="cumulative_egg"/>
+                                <field name="egg_weight"/>
+                                <field name="act"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
