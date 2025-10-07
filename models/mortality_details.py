@@ -5,7 +5,7 @@ import requests
 
 
 class MortalityDetails(models.Model):
-
+     
     _name = "farm.mortality.details"
     _description = "Mortality Details"
     _inherit =['mail.thread','mail.activity.mixin']
@@ -15,7 +15,7 @@ class MortalityDetails(models.Model):
     flock_id = fields.Many2one("farm.layer.flock",string="Flock",required=True,ondelete="cascade")
     date = fields.Date(string ="Date",required=True,default=fields.Date.today)
     state = fields.Selection([('draft', 'Draft'),('done','Done'),], default='draft')
-
+    
     #Mortality breakdown fields
 
     normal = fields.Integer(string="Normal", default=0,tracking =True)

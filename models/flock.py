@@ -5,41 +5,30 @@ class LayerFlock(models.Model):
     
     _name = "farm.layer.flock"
     _description = "Layer / Broiler Flock Information"
-
-    name = fields.Char(string="Flock Name", required=True)
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    name = fields.Char(string="Flock Name", required=True,tracking =True)
 
     bird_type = fields.Selection([
         ('layer','Layer'),
         ('broiler','Broiler'),
         ('duck','Duck')],
-        string="Bird Type")
+        string="Bird Type" ,tranking =True,tracking =True)
     
-    start_date = fields.Date(string="Start Date")
-    end_date = fields.Date(string="End Date")
-    opening_bird_count = fields.Integer(string="Opening Brids")
-    age_in_days = fields.Integer(string="Age in Days", compute="_compute_age", store=True)
-    age_in_weeks = fields.Integer(string="Age in Weeks", compute="_compute_age_weeks", store=True)
-    age_display = fields.Char(string="Age in Week", compute="_compute_age_display")
-    extra_days = fields.Integer(string="Days",compute ="_extra_days",store =True,readonly=True)
-    product_id = fields.Many2one('product.product', string="Product")
+    start_date = fields.Date(string="Start Date",tracking =True)
+    end_date = fields.Date(string="End Date",tracking =True)
+    opening_bird_count = fields.Integer(string="Opening Brids",tracking =True)
+    age_in_days = fields.Integer(string="Age in Days")
+    age_in_weeks = fields.Integer(string="Age in Weeks", compute="_compute_age_weeks", store=True,tracking =True)
+    age_display = fields.Char(string="Age in Week", compute="_compute_age_display",tracking =True)
+    extra_days = fields.Integer(string="Days",compute ="_extra_days",store =True,readonly=True,tracking =True)
+    product_id = fields.Many2one('product.product', string="Product",tracking =True)
+    total_qty = fields.Float(string="Current Birds",related='product_id.qty_available',tracking =True)
     note_html = fields.Html(string="Notes (HTML)")
-
     #relation with mortality details 
-    
-    mortality_ids = fields.One2many("farm.mortality.details", "flock_id", string="Mortality Details")
 
-    @api.depends('start_date', 'end_date')
-
-    def _compute_age(self):
-        for rec in self:
-            if rec.start_date:
-                end = rec.end_date or date.today()
-                rec.age_in_days = (end - rec.start_date).days
-            else:
-                rec.age_in_days = 0
+    mortality_ids = fields.One2many("farm.mortality.details", "flock_id", string="Mortality Details",tracking =True)
 
     @api.depends('age_in_days')
-
     def _compute_age_weeks(self):
         for rec in self:
             rec.age_in_weeks = rec.age_in_days /7 

@@ -12,16 +12,18 @@
                 <field name="name"/>
                 <field name="bird_type"/>
                 <field name="opening_bird_count"/>
+                <field name="total_qty"/>
                 <field name="product_id"/>
             </list>
         </field>
     </record>
-
+      
     <record id="view_layer_flock_form" model="ir.ui.view">
         <field name="name">farm.layer.flock.form</field>
         <field name="model">farm.layer.flock</field>
         <field name="arch" type="xml">
             <form string="Flock Information">
+            
                 <sheet>
                     <group col="2">
                         <group>
@@ -31,8 +33,9 @@
                             <field name="start_date"/>
                             <field name="end_date"/>
                         </group>
+
                         <group>
-                            <field name="opening_bird_count"/>
+                            <field name="total_qty"/>
                             <field name="age_in_days"/>
                             <field name="age_display"/>
                         </group>
@@ -43,6 +46,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>

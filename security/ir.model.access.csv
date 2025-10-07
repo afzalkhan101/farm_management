@@ -3,3 +3,5 @@ access_farm_layer_flock,access.farm.layer.flock,model_farm_layer_flock,,1,1,1,1
 access_farm_mortality_details,access.farm.mortality.details,model_farm_mortality_details,,1,1,1,1
 access_farm_production_details,access.farm.production.details,model_farm_production_details,,1,1,1,1
 access_farm_egg_line,farm.egg.line,model_farm_egg_line,base.group_user,1,1,1,1
+access_farm_temperature_user,Farm Temperature User,model_farm_temperature,,1,1,1,1
+access_farm_medicine_user, farm medicine User,model_farm_medicine,base.group_user,1,1,1,1
